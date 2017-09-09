@@ -8,6 +8,19 @@ var server = new Hapi.Server();
 // Define PORT number
 server.connection({port: 7002});
 
+server.register({
+    register: require('hapi-swagger'),
+    options: {
+        apiVersion: "0.0.1"
+    }
+}, function (err) {
+    if (err) {
+        server.log(['error'], 'hapi-swagger load error: ' + err)
+    } else {
+        server.log(['start'], 'hapi-swagger interface loaded')
+    }
+});
+
 // =============== Routes for our API =======================
 // Define GET route
 server.route({
